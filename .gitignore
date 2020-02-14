@@ -2,23 +2,23 @@
 # An * ensures that everything will be ignored.
 #*
 
-# Whitelist files/folders with !, these will not be ignored.
+# Whitelist files/folders
 !*.yaml
 !.gitignore
 !*.md
 
-# Blacklist folders, these folders are ignored.
+# Ignore folders
 .storage
 .cloud
-.google.token
-.xbox-token
-.HA_VERSION
-android/
-deps/
-tts/
+android
+deps
+tts
 www/assets/
+# Python cache
+__pycache__
 
-# Blacklist files, these files are ignored.
+
+# Ignore files
 ip_bans.yaml
 secrets.yaml
 known_devices.yaml
@@ -28,3 +28,19 @@ groups.yaml
 service_account.json
 home-assistant.log
 home-assistant_v2.db
+__init__.py
+*.google.token
+*.xbox-token
+*.HA_VERSION
+*.log
+*.pid
+*.xml
+*.csr
+*.crt
+*.key
+*.conf
+*.json
+*.db-shm
+*.db-wal
+*.html
+*.pyc
