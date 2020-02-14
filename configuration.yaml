@@ -1,0 +1,46 @@
+homeassistant:
+  customize: !include customize.yaml
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# using SSL/TLS/Docker container
+http: !include http.yaml
+
+# Enables the frontend
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Text to speech
+tts:
+  - platform: google_translate
+    service_name: google_say
+    language: 'en-uk'
+
+# Google Assistant
+google_assistant:
+  project_id: hassio-iga
+  service_account: !include service_account.json
+  exposed_domains:
+    - switch
+    - media_player
+
+# Device Trackers
+device_tracker: !include_dir_list device_tracker/
+# Lights
+light: !include_dir_merge_list light/
+# Media Players
+media_player: !include_dir_merge_list media_player/ 
+# Sensors
+sensor: !include_dir_merge_list sensors/
+# Switches
+switch: !include_dir_merge_list switch/
+# Speedtest by Ookla
+speedtestdotnet:
+# Weather
+weather: !include_dir_merge_list weather/
+
+###
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml

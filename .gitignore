@@ -1,0 +1,29 @@
+# .gitignore file for your config dir.
+# An * ensures that everything will be ignored.
+*
+
+# Whitelist files/folders with !, these will not be ignored.
+!*.yaml
+!.gitignore
+!*.md
+
+# Blacklist folders, these folders are ignored.
+.storage
+.cloud
+.google.token
+.xbox-token
+.HA_VERSION
+.android
+.deps
+.tts
+
+# Blacklist files, these files are ignored.
+ip_bans.yaml
+secrets.yaml
+known_devices.yaml
+customize.yaml
+http.yaml
+groups.yaml
+service_account.json
+home-assistant.log
+home-assistant_v2.db

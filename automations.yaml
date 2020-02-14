@@ -1,0 +1,112 @@
+- alias: Light theme after Sunrise
+  trigger:
+    platform: sun
+    event: sunrise
+  action:
+  - service: frontend.set_theme
+    data:
+      name: Google Light Theme
+  id: e6bc5ecaf33c4ac1b4bcdcff45bc9d41
+- alias: Dark theme after Sunset
+  trigger:
+    platform: sun
+    event: sunset
+  action:
+  - service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+  id: b39ed6ac1a6b4e35970ecf66c193dfa4
+- alias: Light theme after reboot in day
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: above_horizon
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Light Theme
+  id: 08c15ba2b46b4eb5956d68a725726ed9
+- alias: Dark theme after reboot in night
+  trigger:
+    platform: homeassistant
+    event: start
+  condition:
+    condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  action:
+    service: frontend.set_theme
+    data:
+      name: Google Dark Theme
+  id: 74495366455d45c9baaef9e4ede2bdd3
+- id: '1579302598090'
+  alias: 'GH: Welcome Home'
+  description: Greet family members when they enter Home.
+  trigger:
+  - entity_id: person.saif
+    from: not_home
+    platform: state
+    to: home
+  condition: []
+  action:
+  - entity_id: media_player.saifs_speaker
+    service: media_player.turn_on
+  - delay: 00:00:02
+  - data:
+      entity_id: media_player.saifs_speaker
+      message: Welcome home, Saif!
+    service: tts.google_translate_say
+  - delay: 00:00:04
+  - data:
+      entity_id: media_player.saifs_speaker
+    service: media_player.turn_off
+- id: '1581097204639'
+  alias: Turn on the lights when the sun is set
+  description: ''
+  trigger:
+  - event: sunset
+    platform: sun
+  condition: []
+  action:
+  - device_id: 0cd5b391fbf1460ca55f5ef6675867fc
+    domain: light
+    entity_id: light.saif_s_desk
+    type: turn_on
+- id: '1581611557026'
+  alias: 'GH: Adhan'
+  description: Play Adhan on Google Home
+  condition: []
+  action:
+  - data:
+      entity_id: media_player.saifs_speaker
+      media_content_id: https://www.islamcan.com/audio/adhan/azan2.mp3
+      media_content_type: audio/mp3
+    service: media_extractor.play_media
+  - data:
+      entity_id: media_player.saifs_speaker
+      volume_level: '0.9'
+    service: media_player.volume_set
+  trigger:
+  - platform: template
+    value_template: '{{ as_timestamp(strptime(states("sensor.time_date"), "%H:%M,
+      %Y-%m-%d")) == as_timestamp(strptime(states("sensor.islamic_prayer_time_fajr"),
+      "%Y-%m-%dT%H:%M:%S")) }}'
+  - platform: template
+    value_template: '{{ as_timestamp(strptime(states("sensor.time_date"), "%H:%M,
+      %Y-%m-%d")) == as_timestamp(strptime(states("sensor.islamic_prayer_time_dhuhr"),
+      "%Y-%m-%dT%H:%M:%S")) }}'
+  - platform: template
+    value_template: '{{ as_timestamp(strptime(states("sensor.time_date"), "%H:%M,
+      %Y-%m-%d")) == as_timestamp(strptime(states("sensor.islamic_prayer_time_asr"),
+      "%Y-%m-%dT%H:%M:%S")) }}'
+  - platform: template
+    value_template: '{{ as_timestamp(strptime(states("sensor.time_date"), "%H:%M,
+      %Y-%m-%d")) == as_timestamp(strptime(states("sensor.islamic_prayer_time_maghrib"),
+      "%Y-%m-%dT%H:%M:%S")) }}'
+  - platform: template
+    value_template: '{{ as_timestamp(strptime(states("sensor.time_date"), "%H:%M,
+      %Y-%m-%d")) == as_timestamp(strptime(states("sensor.islamic_prayer_time_isha"),
+      "%Y-%m-%dT%H:%M:%S")) }}'
