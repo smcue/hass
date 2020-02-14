@@ -1,0 +1,6 @@
+saif_s_desk_brightness:
+  value_template: >-
+      {% if is_state("light.saif_s_desk", "on") %}
+        {{ "%2d" | format(states.light.saif_s_desk.attributes.brightness | int / 2.55 ) }}%
+        {% else %}
+        {% endif %}

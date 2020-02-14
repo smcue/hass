@@ -1,0 +1,3 @@
+# RPI PS Check
+- platform: rpi_power
+  text_state: true

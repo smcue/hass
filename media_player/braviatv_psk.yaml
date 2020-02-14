@@ -1,0 +1,11 @@
+# Sony Bravia TV
+- platform: braviatv_psk
+  host: !secret braviatv_ip
+  psk: sony
+  mac: !secret braviatv_mac
+  amp: True
+  android: True
+  sourcefilter:
+    - ' HD'
+    - HDMI
+  name: Living Room TV

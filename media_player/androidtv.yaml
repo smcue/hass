@@ -1,0 +1,49 @@
+# Android TV Devices
+#- platform: androidtv
+#  name: Shield TV
+#  host: !secret shieldtv_ip
+#  adb_server_ip: 127.0.0.1
+#  adb_server_port: 5037
+- platform: androidtv
+  name: Saif's TV
+  host: !secret mibox_ip
+  adb_server_ip: 127.0.0.1
+  adb_server_port: 5037
+  get_sources: true
+  apps:
+    com.google.android.leanbacklauncher: "Android Home"
+    com.google.android.tvlauncher: "Android Home"
+    com.google.android.tv: "Live TV"
+    com.pineone.sb: "Live TV"
+    se.hedekonsult.pvrlive: "PVR Live"
+    com.plexapp.android: Plex
+    com.google.android.youtube.tv: "YouTube"
+    com.amazon.amazonvideo.livingroom: "AmazonPrimeVideo"
+    com.netflix.ninja: "Netflix"
+  turn_on_command: "input keyevent 3"
+  turn_off_command: "input keyevent 223"
+  state_detection_rules:
+    'com.google.android.leanbacklauncher':
+      - 'standby'
+    'com.google.android.tvlauncher':
+      - 'standby'
+    'com.pineone.sb':
+        - 'playing':
+            'wake_lock_size': 1
+        - 'standby':
+            'wake_lock_size': 2
+    'com.plexapp.android':
+        - 'paused':
+            'media_session_state': 3  # this indentation is important!
+            'wake_lock_size': 1       # this indentation is important!
+        - 'playing':
+            'media_session_state': 3  # this indentation is important!
+        - 'standby'
+#
+#- platform: androidtv
+#  device_class: firetv
+#  name: Fire TV
+#  host: !secret firetv_ip
+#  adb_server_ip: 127.0.0.1
+#  adb_server_port: 5037
+#  get_sources: false

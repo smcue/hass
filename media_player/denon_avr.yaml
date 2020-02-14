@@ -1,0 +1,5 @@
+- platform: denonavr
+  host: !secret denonavr_ip
+  name: Denon AVR
+  show_all_sources: false
+  timeout: 2

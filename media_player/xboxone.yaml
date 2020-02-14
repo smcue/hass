@@ -1,0 +1,3 @@
+platform: xboxone
+name: Xbox One
+ip_address: !secret xbox_ip

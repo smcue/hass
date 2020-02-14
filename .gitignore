@@ -1,6 +1,6 @@
 # .gitignore file for your config dir.
 # An * ensures that everything will be ignored.
-*
+#*
 
 # Whitelist files/folders with !, these will not be ignored.
 !*.yaml
@@ -13,9 +13,10 @@
 .google.token
 .xbox-token
 .HA_VERSION
-.android
-.deps
-.tts
+android/
+deps/
+tts/
+www/assets/
 
 # Blacklist files, these files are ignored.
 ip_bans.yaml

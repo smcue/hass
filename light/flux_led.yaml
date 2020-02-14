@@ -1,0 +1,6 @@
+## MagicLED
+- platform: flux_led
+  devices:
+    192.168.0.13:
+      name: Saif's Desk
+  automatic_add: true

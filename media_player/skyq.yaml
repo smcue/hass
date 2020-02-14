@@ -1,0 +1,9 @@
+# Sky Q Devices
+- platform: skyq
+  name: Sky Q
+  host: !secret skyq_ip
+  room: Living Room  
+  config_directory: '/config/'
+  sources:
+      SkyOne: '1,0,6'
+      SkyNews: '5,0,1'
